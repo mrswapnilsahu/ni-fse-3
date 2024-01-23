@@ -1,0 +1,44 @@
+service: serverless-mongo
+frameworkVersion: "3"
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  memorySize: 128
+  region: ap-south-1
+  stage: ${opt:stage, 'dev'}
+  httpApi:
+    cors: true
+
+functions:
+  createUser:
+    handler: src/handlers/createUser.handler
+    events:
+      - httpApi:
+          path: /save
+          method: POST
+
+  getUser:
+    handler: src/handlers/getUser.handler
+    events:
+      - httpApi:
+          path: /id/{userId}
+          method: GET
+
+  updateUser:
+    handler: src/handlers/updateUser.handler
+    events:
+      - httpApi:
+          path: /id/{userId}
+          method: PUT
+
+  getAllUsers:
+    handler: src/handlers/getAllUsers.handler
+    events:
+      - httpApi:
+          path: /id
+          method: GET
