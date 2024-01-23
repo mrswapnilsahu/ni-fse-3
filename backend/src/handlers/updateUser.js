@@ -15,21 +15,26 @@ module.exports.handler = async (event, context) => {
       foundUser.email = email;
       foundUser.phone = phone;
       const updatedUser = await foundUser.save();
-      return {
+      const response = {
         statusCode: 200,
         body: JSON.stringify(updatedUser),
       };
+      console.log("Response: ", response);
+      return response;
     } else {
-      return {
+      const response = {
         statusCode: 404,
         body: JSON.stringify({ error: "User not found" }),
       };
+      console.error("Error: ", response);
+      return response;
     }
   } catch (err) {
-    console.error(err);
-    return {
+    const response = {
       statusCode: err.statusCode || 500,
       body: JSON.stringify({ error: err.message }),
     };
+    console.error("Error occured while processing the request: ", response);
+    return response;
   }
 };

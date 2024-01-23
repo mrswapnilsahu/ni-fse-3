@@ -14,14 +14,18 @@ module.exports.handler = async (event, context) => {
       phone,
     });
     const savedUser = await user.save();
-    return {
+    const response = {
       statusCode: 200,
       body: JSON.stringify({ message: "User details added!" }),
     };
+    console.log("Response: ", response);
+    return response;
   } catch (err) {
-    return {
+    const response = {
       statusCode: err.statusCode || 500,
       body: JSON.stringify({ error: err.message }),
     };
+    console.error("Error occured while processing the request: ", response);
+    return response;
   }
 };

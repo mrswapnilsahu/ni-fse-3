@@ -14,9 +14,9 @@ export const UserList = ({ _id, firstName, lastName, email, phone }) => {
       <TableCell component="th" scope="row" align="center">
         {lastName}
       </TableCell>
-      <TableCell align="right">{email}</TableCell>
-      <TableCell align="right">{phone}</TableCell>
-      <TableCell align="right">
+      <TableCell align="center">{email}</TableCell>
+      <TableCell align="center">{phone}</TableCell>
+      <TableCell align="center">
         <Button color="primary" variant="contained">
           <Link to={`/edit/${_id}`} style={{ color: "#fff", textDecoration: "none" }}>Edit</Link>
         </Button>
